@@ -2,7 +2,7 @@
 layout: ../layouts/BlogPost.astro
 title: Blogging with Bluesky comments enabled!
 slug: bsky-comments
-description: Blogging with Bluesky comments enabled!
+description: Bluesky comments?! Such cool! WOW!
 tags:
   - technical
   - meta
