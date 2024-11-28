@@ -9,5 +9,3 @@ added: 2024-05-01T00:00:00.000Z
 ---
 
 This is an example blog post!
-
-Super happy example time!
