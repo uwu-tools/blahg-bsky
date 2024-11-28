@@ -5,58 +5,113 @@ import Footer from "../components/Footer.astro";
 import ColorScript from "../components/ColorScript.astro";
 import Tags from "../components/Tags.astro";
 import getTags from "../scripts/getTags";
+import CommentSection from "../components/CommentSection.astro";
 
 const posts = await Astro.glob("../posts/*.md");
 const allTags = getTags(posts);
+const { content } = Astro.props;
 
 let {
-	content: { title, description, added, updated, tags, heroImage },
+  content: { title, description, added, updated, tags, heroImage },
 } = Astro.props;
 
-added = new Date(added).toLocaleDateString(
-	"en-us",
-	{
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-	}
-);
+added = new Date(added).toLocaleDateString("en-us", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
 
 if (updated) {
-	updated = new Date(updated).toLocaleDateString(
-		"en-us",
-		{
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-		}
-	);
+  updated = new Date(updated).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+// Define the type for our stats
+type PostStats = {
+  likeCount: number;
+  repostCount: number;
+  replyCount: number;
+}
+
+// Fetch Bluesky stats if we have a URI
+let postStats: PostStats | null = null;
+if (content.blueskyUri) {
+  try {
+    const endpoint = `https://api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(content.blueskyUri)}`;
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      if (data.thread?.post) {
+        postStats = {
+          likeCount: data.thread.post.likeCount || 0,
+          repostCount: data.thread.post.repostCount || 0,
+          replyCount: data.thread.post.replyCount || 0
+        };
+      }
+    }
+  } catch (e) {
+    console.error('Error fetching stats:', e);
+  }
 }
 ---
 
 <html lang="en-us">
-	<BaseHead title={title} description={description} />
+  <BaseHead title={title} description={description} />
+  <body>
+    <Header />
+    <main>
+      <article>
+        {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+        <h1 class="article-title">{title}</h1>
+        {updated ? (
+          <span>
+            <time>{added}</time>, last updated on <time>{updated}</time>
+          </span>
+        ) : (
+          <span>{added && <time>{added}</time>}</span>
+        )}
+        <Tags tags={tags} />
+        <hr />
+        <div class="blog-post">
+          <slot />
+        </div>
+      </article>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-				<h1 class="article-title">{title}</h1>
-				{updated ?
-					<span><time>{added}</time>, last updated on <time>{updated}</time></span>
-					:
-					<span>{added && <time>{added}</time>}</span>
-				}
-				<Tags tags={tags} />
-				<hr />
-				<div class="blog-post">
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Tags tags={allTags} all />
-		<Footer />
-		<ColorScript />
-	</body>
+      {postStats && (
+        <div class="bluesky-stats">
+          <span title="Likes">💗 {postStats.likeCount} likes</span>
+          <span title="Reposts">🔄 {postStats.repostCount} reposts</span>
+          <span title="Replies">💬 {postStats.replyCount} replies</span>
+        </div>
+      )}
+
+      {content.blueskyUri && <CommentSection uri={content.blueskyUri} />}
+    </main>
+    <hr />
+    <Tags tags={allTags} all />
+    <Footer />
+    <ColorScript />
+  </body>
 </html>
+
+<style>
+  .bluesky-stats {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    color: var(--gray);
+    font-size: 0.9rem;
+  }
+
+  .blog-post {
+    margin-bottom: 1.5rem;
+  }
+</style>

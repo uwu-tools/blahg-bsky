@@ -125,6 +125,12 @@ export default defineConfig({
 						label: "Body",
 						isBody: true,
 					},
+					{
+						type: "string",
+						name: "blueskyUri",
+						label: "Bluesky Post URI",
+						description: "URI of the corresponding Bluesky post for comments",
+					},
 				],
 			},
 		],
