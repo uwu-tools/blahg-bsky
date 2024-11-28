@@ -7,7 +7,7 @@ tags:
   - technical
   - meta
 added: 2024-11-28T15:36:11.244Z
-blueskyUri: 'at://did:plc:ekcyikfp2mpymgtyzz7wkfuj/app.bsky.feed.post/3lbzfrcyejs2t'
+blueskyUri: 'at://did:plc:ekcyikfp2mpymgtyzz7wkfuj/app.bsky.feed.post/3lbzgeshvqs2p'
 ---
 
 Let's see if this works!
