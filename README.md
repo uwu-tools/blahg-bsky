@@ -8,7 +8,7 @@ Hello, welcome. This is a blog ("blahg" is the proper spelling for Chicagoans) t
 
 ## See the blahg
 
-[blahg.netlify.app](https://blahg.netlify.app/)
+[blahg-bsky.netlify.app](https://blahg-bsky.netlify.app/)
 
 ## To use the template
 
