@@ -1,0 +1,46 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Post from "../components/Post.astro";
+import ColorScript from "../components/ColorScript.astro";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob("../posts/*.md")).sort(
+	(a, b) =>
+		new Date(b.frontmatter.updated || b.frontmatter.added).valueOf() -
+		new Date(a.frontmatter.updated || a.frontmatter.added).valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en-us">
+	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	<body>
+		<Header />
+		<main>
+			<content>
+				<ul class="posts-list">
+					{
+						posts.map(
+							({
+								url,
+								frontmatter: { description, slug, title, tags, added: date },
+							}) => <Post {description} {date} {slug} {title} {tags} />
+						)
+					}
+				</ul>
+			</content>
+
+			<p class="center">
+				You can also <a href="https://blahg.netlify.app/rss.xml">
+					subscribe with RSS!
+				</a>
+			</p>
+		</main>
+		<Footer />
+		<ColorScript />
+	</body>
+</html>
