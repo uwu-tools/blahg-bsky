@@ -27,6 +27,21 @@ After this, you can add your content to `src/posts` with Markdown files, or with
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/cassidoo/blahg)
 
+## Bluesky comments
+
+Each time you create a blog post:
+
+- Write and publish your blog post
+- Share it on Bluesky
+- Get the Bluesky post's URI:
+  - Go to your Bluesky post
+  - Click the timestamp to open the single post view
+- Format the URI as: `at://\[your-DID]/app.bsky.feed.post/\[post-id]`
+- Add this URI to your blog post's "Bluesky Post URI" field in TinaCMS
+- Publish your changes
+
+Your blog will now display any Bluesky replies to your post as comments!
+
 And finally, please ping me (via social media, or in a GitHub Issue, or whatever) if you use this template! I would love to see your writing and subscribe to your RSS feed!
 
 ## Run it yourself
