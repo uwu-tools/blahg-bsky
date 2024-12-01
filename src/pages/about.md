@@ -1,6 +1,6 @@
 # Welcome to your new blog template!
 
-It extends [cassidoo's](https://cassidoo.co) wonderful [*blahg*](https://github.com/cassidoo/blahg) template with the ability to add comments to posts via Bluesky, which was worked on by [jadeox](https://blog.jade0x.com/post/adding-bluesky-comments-to-your-astro-blog/). Check out [this post](/post/bsky-comments/) to see it in action!
+It extends [cassidoo's](https://cassidoo.co) wonderful [*blahg*](https://github.com/cassidoo/blahg) template with the ability to add comments to posts via Bluesky, which was worked on by [jade0x](https://blog.jade0x.com/post/adding-bluesky-comments-to-your-astro-blog/). Check out [this post](/post/bsky-comments/) to see it in action!
 
 The template uses [Astro](https://astro.build/) and [TinaCMS](https://tina.io/).
 You can [clone it on GitHub](https://github.com/uwu-tools/blahg-bsky) to use it for yourself, and see how it works. The GitHub instructions are not completely up-to-date yet, but feel free to file an issue or shoot me a note on [Bluesky](https://bsky.app/profile/auggie.dev)!
