@@ -13,7 +13,7 @@
 		"@astrojs/rss": "^4.0.9",
 		"@astrojs/sitemap": "^3.2.1",
 		"astro": "^4.16.16",
-		"prettier": "^3.4.1",
+		"prettier": "^3.4.2",
 		"prettier-plugin-astro": "^0.14.1"
 	},
 	"dependencies": {
